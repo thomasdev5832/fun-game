@@ -1,3 +1,8 @@
+function refreshPage(){
+  window.location.reload();
+} 
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const hero = document.querySelector('.hero')
     const grid = document.querySelector('.grid')
@@ -51,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function enemies() {
       let randomTime = Math.random() * 3000
-      let enemyPosition = 1200
+      let enemyPosition = 1700
       const enemy = document.createElement('div')
       if (!isGameOver) {
       enemy.classList.add('enemy')
@@ -65,15 +70,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
         if (enemyPosition > 0 && enemyPosition < 64 && heroPosition < 64) {
           clearInterval(upHigh)
-          theEnd.innerHTML = 'Game Over! Atualize a página para tentar novamente.'
+          theEnd.innerHTML = 'GAME OVER'
           isGameOver = true
-          //remove all children
-          body.removeChild(body.firstChild)
+          
+          document.body.style.backgroundColor = "black"
+          document.getElementById("world").style.animationPlayState = "paused"
+          document.getElementById("world").style.backgroundColor = "black"
+          document.getElementById("refresh-button").style.display = "flex"
+
+          setTimeout(() => {
+            body.removeChild(body.firstChild)
+          }, 200000)
+          
           while (grid.firstChild) {
             grid.removeChild(grid.lastChild)
           }
-          
-          
+
         }
        
       }, 20)
@@ -81,3 +93,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     enemies()
     })
+
+
